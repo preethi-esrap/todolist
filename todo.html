@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .todo-list {
+      max-width: 400px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 15px;
+    }
+    .todo-item {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="todo-list">
+      <h2 class="text-center">To-Do List</h2>
+      <form id="todoForm">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Add new item" id="todoInput" required>
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Add</button>
+          </div>
+        </div>
+      </form>
+      <ul class="list-group" id="todoList">
+        <!-- To-do items will be dynamically added here -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies (jQuery) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+    // Function to add a new to-do item
+    function addTodo() {
+      var todoInput = document.getElementById('todoInput');
+      var todoList = document.getElementById('todoList');
+      
+      // Create new list item
+      var li = document.createElement('li');
+      li.className = 'list-group-item';
+      li.appendChild(document.createTextNode(todoInput.value));
+      
+      // Add delete button to list item
+      var deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn btn-danger btn-sm float-right';
+      deleteBtn.appendChild(document.createTextNode('X'));
+      deleteBtn.onclick = function() {
+        li.remove();
+      };
+      li.appendChild(deleteBtn);
+      
+      // Append list item to list
+      todoList.appendChild(li);
+      
+      // Clear input
+      todoInput.value = '';
+    }
+    
+    // Handle form submit
+    document.getElementById('todoForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      addTodo();
+    });
+  </script>
+</body>
+</html>
